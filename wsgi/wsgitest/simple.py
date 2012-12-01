@@ -40,9 +40,7 @@ def url_mapping(environ, start_response):
     # このスクリプトに渡されたパス情報
     path = environ['PATH_INFO']
 
-    if path == '/spam':
-        return spam(environ, start_response)
-    elif path == '/fib':
+    if path == '/fib':
         return fib(environ, start_response)
     else:
         return hello(environ, start_reponse)
@@ -68,7 +66,7 @@ def fib(environ, start_response):
     フィボナッチを計算して返す
     '''
 
-    fs = cgi.FieldStorage(environ=environ)
+    fs = cgi.FieldStorage(environ=environ, fp=environ['wsgi.input'])
     value = fs.getfirst('value', '0')
 
     val = int(value)
@@ -81,6 +79,18 @@ def fib(environ, start_response):
 
 
 
+def empty(app):
+    u'''
+    何もしないミドルウェア
+    '''
+
+    def internal(environ, start_response):
+
+        return app(environ, start_response)
+
+
+
+
 def run(app):
 
     server = simple_server.make_server('', 8080, app)
@@ -90,7 +100,7 @@ def run(app):
 
 main = lambda: run(hello)
 
-main_fib = lambda: run(fib)
+main_fib = lambda: run(empty(fib))
 
 main_map = lambda: run(rul_map)
 

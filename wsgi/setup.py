@@ -26,7 +26,9 @@ setuptools.setup(
     entry_points=dict(
         console_scripts=['run=wsgitest.simple:main',
                          'fib=wsgitest.simple:main_fib',
-                         'map=wsgitest.simple:main_map'],
+                         'map=wsgitest.simple:main_map',
+                         'error=wsgitest.weberror:main',
+                         ],
         ),
     classifiers='''
 Programming Language :: Python

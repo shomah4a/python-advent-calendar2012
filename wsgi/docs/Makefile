@@ -3,16 +3,16 @@
 
 # You can set these variables from the command line.
 SPHINXOPTS    =
-SPHINXBUILD   = sphinx-build
+SPHINXBUILD = /home/shoma/Dropbox/source/python/ac2012/wsgi/bin/sphinx-build
 PAPER         =
-BUILDDIR      = _build
+BUILDDIR      = /home/shoma/Dropbox/source/python/ac2012/wsgi/docs
 
 # Internal variables.
 PAPEROPT_a4     = -D latex_paper_size=a4
 PAPEROPT_letter = -D latex_paper_size=letter
-ALLSPHINXOPTS   = -d $(BUILDDIR)/doctrees $(PAPEROPT_$(PAPER)) $(SPHINXOPTS) .
+ALLSPHINXOPTS   = -d $(BUILDDIR)/doctrees $(PAPEROPT_$(PAPER)) $(SPHINXOPTS) /home/shoma/Dropbox/source/python/ac2012/wsgi/sphinx
 # the i18n builder cannot share the environment and doctrees with the others
-I18NSPHINXOPTS  = $(PAPEROPT_$(PAPER)) $(SPHINXOPTS) .
+I18NSPHINXOPTS  = $(PAPEROPT_$(PAPER)) $(SPHINXOPTS) /home/shoma/Dropbox/source/python/ac2012/wsgi/sphinx
 
 .PHONY: help clean html dirhtml singlehtml pickle json htmlhelp qthelp devhelp epub latex latexpdf text man changes linkcheck doctest gettext
 
@@ -77,17 +77,17 @@ qthelp:
 	@echo
 	@echo "Build finished; now you can run "qcollectiongenerator" with the" \
 	      ".qhcp project file in $(BUILDDIR)/qthelp, like this:"
-	@echo "# qcollectiongenerator $(BUILDDIR)/qthelp/PythonWebFrameworkAdventCalendar2012.qhcp"
+	@echo "# qcollectiongenerator $(BUILDDIR)/qthelp/make-docs.qhcp"
 	@echo "To view the help file:"
-	@echo "# assistant -collectionFile $(BUILDDIR)/qthelp/PythonWebFrameworkAdventCalendar2012.qhc"
+	@echo "# assistant -collectionFile $(BUILDDIR)/qthelp/make-docs.qhc"
 
 devhelp:
 	$(SPHINXBUILD) -b devhelp $(ALLSPHINXOPTS) $(BUILDDIR)/devhelp
 	@echo
 	@echo "Build finished."
 	@echo "To view the help file:"
-	@echo "# mkdir -p $$HOME/.local/share/devhelp/PythonWebFrameworkAdventCalendar2012"
-	@echo "# ln -s $(BUILDDIR)/devhelp $$HOME/.local/share/devhelp/PythonWebFrameworkAdventCalendar2012"
+	@echo "# mkdir -p $$HOME/.local/share/devhelp/make-docs"
+	@echo "# ln -s $(BUILDDIR)/devhelp $$HOME/.local/share/devhelp/make-docs"
 	@echo "# devhelp"
 
 epub:
