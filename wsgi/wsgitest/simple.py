@@ -88,7 +88,7 @@ def empty(app):
 
         return app(environ, start_response)
 
-
+    return internal
 
 
 def run(app):
@@ -100,7 +100,7 @@ def run(app):
 
 main = lambda: run(hello)
 
-main_fib = lambda: run(empty(fib))
+main_fib = lambda: run(fib)
 
 main_map = lambda: run(rul_map)
 

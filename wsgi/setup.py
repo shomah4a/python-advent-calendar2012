@@ -27,6 +27,7 @@ setuptools.setup(
         console_scripts=['run=wsgitest.simple:main',
                          'fib=wsgitest.simple:main_fib',
                          'map=wsgitest.simple:main_map',
+                         'paste_map=wsgitest.paste:map',
                          'error=wsgitest.weberror:main',
                          ],
         ),
