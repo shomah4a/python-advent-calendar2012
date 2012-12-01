@@ -1,0 +1,8 @@
+*.pyc
+*~
+#*#
+bin
+parts
+.*
+develop-eggs
+*.egg-info
