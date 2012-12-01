@@ -24,7 +24,9 @@ setuptools.setup(
     description='This module provides scala implicit conversion and implicit parameter mechanism for python.',
     long_description=pkg.__doc__,
     entry_points=dict(
-        console_scripts=['run=wsgitest.simple:main'],
+        console_scripts=['run=wsgitest.simple:main',
+                         'fib=wsgitest.simple:main_fib',
+                         'map=wsgitest.simple:main_map'],
         ),
     classifiers='''
 Programming Language :: Python
