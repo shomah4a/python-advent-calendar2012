@@ -79,6 +79,33 @@ def fib(environ, start_response):
 
 
 
+def mapping(patterns, default=None):
+    u'''
+    patterns に登録してあるマッピング情報絵振り分ける
+
+    :param dist patterns: パスをキー、 WSGI アプリケーションを値とする辞書
+    :param app default: パスにないときに呼ぶアプリケーション
+    '''
+
+    def internal(environ, start_response):
+
+        path = environ['PATH_INFO']
+
+        if path in patterns:
+            return patterns[path](environ, start_response)
+        elif default is not None:
+            return default(environ, start_response)
+
+
+        start_response('404 NotFound', [('Content-Type', 'text/plain')])
+
+        return ['{0} not found'.format(path)]
+
+
+    return internal
+
+
+
 def empty(app):
     u'''
     何もしないミドルウェア
@@ -102,7 +129,7 @@ main = lambda: run(hello)
 
 main_fib = lambda: run(fib)
 
-main_map = lambda: run(rul_map)
+main_map = lambda: run(mapping({'/fib':fib}, hello))
 
 
 

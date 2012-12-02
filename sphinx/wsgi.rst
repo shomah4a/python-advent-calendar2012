@@ -1,6 +1,6 @@
-===========================
- WSGI でなんかつくってみる
-===========================
+=======================================
+ WSGI でなんかつくってみる #python_adv
+=======================================
 
 `2012 Pythonアドベントカレンダー(Webフレームワーク) <http://connpass.com/event/1439/>`_ の二日目です。
 
@@ -241,7 +241,62 @@ URL マッピングしてみる
 
 ソースを見ればわかりますが、 /fib にアクセスされるとフィボナッチを、それ以外では Hello World を返すようなアプリケーションです。
 
+でもこれだと汎用性がないので汎用性をもたせましょう。
+
+
+.. code-block:: python
+
+   def mapping(patterns, default=None):
+       u'''
+       patterns に登録してあるマッピング情報絵振り分ける
+
+       :param dist patterns: パスをキー、 WSGI アプリケーションを値とする辞書
+       :param app default: パスにないときに呼ぶアプリケーション
+       '''
+
+       def internal(environ, start_response):
+
+           path = environ['PATH_INFO']
+
+           if path in patterns:
+               return patterns[path](environ, start_response)
+           elif default is not None:
+               return default(environ, start_response)
+
+
+           start_response('404 NotFound', [('Content-Type', 'text/plain')])
+
+           return ['{0} not found'.format(path)]
+
+
+       return internal
+
+
+こんな感じでマッピング用にキーとアプリケーションの辞書を受け取ってアプリケーションを返します。
+
+これを
+
+.. code-block:: python
+
+   app = mapping({'/fib':fib}, hello)
+   run(app)
+
+
+とやると、大体さっきのマッピングアプリケーションと同じように動きます。
+
+
 まあお試しください。
+
+ミドルウェアを使うと、アプリケーションとは独立して機能を追加したりできます。
+
+認証やらキャッシュやらするようなミドルウェアも世にはあるので色々試してみるといいでしょう。
+
+.. note::
+
+   余力のあるひとはアプリケーションで例外が発生した時に、それをキャッチしてトレースバックをレスポンスとして返すようなミドルウェアを作ってみると面白いかもしれません。
+
+   既にどこかに転がっているとは思いますけどね :)
+
 
 
 ライブラリを使ってみる
