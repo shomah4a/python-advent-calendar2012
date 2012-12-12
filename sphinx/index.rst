@@ -13,6 +13,7 @@ Contents:
 
    wsgi
    kabe01
+   kabe02
 
 
 
