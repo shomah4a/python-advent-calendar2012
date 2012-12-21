@@ -14,6 +14,7 @@ Contents:
    wsgi
    kabe01
    kabe02
+   kabe03
 
 
 
